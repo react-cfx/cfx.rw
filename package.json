@@ -1,0 +1,37 @@
+{
+  "name": "cfx.rw",
+  "version": "0.0.0",
+  "description": "cfx.rw",
+  "main": "index.js",
+  "scripts": {
+    "test": "./test/index.coffee",
+    "clean": "rm -rf build",
+    "build": "npm run clean; coffee -bo build src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-cfx/cfx.rw.git"
+  },
+  "keywords": [
+    "cfx",
+    "react",
+    "rw"
+  ],
+  "author": "FooTearth <footearth@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/react-cfx/cfx.rw/issues"
+  },
+  "homepage": "https://github.com/react-cfx/cfx.rw#readme",
+  "devDependencies": {
+    "ddeyes": "0.0.1",
+    "shelljs": "^0.7.0"
+  },
+  "dependencies": {
+    "cfx.react-redux": "git+https://github.com/react-cfx/cfx.react-redux.git",
+    "classnames": "^2.2.5",
+    "coffee-script": "^1.10.0",
+    "radium": "^0.17.1",
+    "react": "^15.1.0"
+  }
+}
