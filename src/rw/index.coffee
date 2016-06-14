@@ -7,7 +7,12 @@
   cfx
 } = require './Cfxify'
 
-Styl = require './Sytle'
+{
+  Presets
+  LookRoot
+  StyleSheet
+} = require 'react-look'
+Style = require './Sytle'
 
 createComponent = require '../common/Component'
 classnames = require './classnames'
@@ -25,8 +30,13 @@ module.exports = {
   cfxify
   cfx
 
-  Styl
+  # Style
+  Styl: StyleSheet.create
+  c: StyleSheet.combineStyles
   classnames
+
+  Presets
+  LookRoot
 
   Comps
 

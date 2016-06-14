@@ -9,7 +9,7 @@ cfxify = (e) ->
   (args...) -> createElement.apply @
   , [ e ].concat args
 
-cfx = (component, wrapFunc) ->
+cfx = (component, wrapFuncs) ->
 
   # if component.propTypes
   #   pt = component.propTypes PropTypes
@@ -19,9 +19,11 @@ cfx = (component, wrapFunc) ->
 
   # comp.propTypes = pt if pt
 
-  unless wrapFunc
-  then cfxify comp
-  else cfxify wrapFunc comp
+  if wrapFuncs
+    for wrapFunc in wrapFuncs
+      comp = wrapFunc comp
+
+  cfxify comp
 
 module.exports = {
   cfxify

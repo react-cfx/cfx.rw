@@ -14,14 +14,16 @@ cfxify = function(e) {
   };
 };
 
-cfx = function(component, wrapFunc) {
-  var comp;
+cfx = function(component, wrapFuncs) {
+  var comp, i, len, wrapFunc;
   comp = createComponent.call(this, component);
-  if (!wrapFunc) {
-    return cfxify(comp);
-  } else {
-    return cfxify(wrapFunc(comp));
+  if (wrapFuncs) {
+    for (i = 0, len = wrapFuncs.length; i < len; i++) {
+      wrapFunc = wrapFuncs[i];
+      comp = wrapFunc(comp);
+    }
   }
+  return cfxify(comp);
 };
 
 module.exports = {

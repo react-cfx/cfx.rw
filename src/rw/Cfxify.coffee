@@ -4,12 +4,20 @@
 } = require '../common/Cfxify'
 
 Radium = require 'radium'
+look = (
+  require 'react-look'
+).default
 # CSSModules = require 'react-css-modules'
 
 RW = {
   cfxify
   cfx: (component) ->
-    cfx.call @, component, Radium
+    cfx.call @
+    , component
+    , [
+      Radium
+      look
+    ]
 }
 
 module.exports = RW
