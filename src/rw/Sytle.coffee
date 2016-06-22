@@ -21,6 +21,8 @@ c = StyleSheet.combineStyles
 
 Styl = (cssData) ->
 
+  return unless cssData
+
   cssObj =
     reactcss:
       default:

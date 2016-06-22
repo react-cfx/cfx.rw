@@ -22,26 +22,37 @@ RW =
       # isArray
       if Array.isArray props.style
 
-        for i, v of props.style
+        styleArray = []
+        classNames =
+          if props.className
+          then [ props.className ]
+          else []
+
+        for index, style of props.style
 
           {
             reactcss
             reactlook
-          } = props.style[i]
+          } = style
 
           if reactcss or reactlook
 
-            props.style[i] = reactCSS reactcss
+            reactcss = (reactCSS reactcss).default
+            reactlook = (ssct reactlook).default
 
-            reactlook = ssct reactlook
+            styleArray.push reactcss if reactcss
+            classNames.push reactlook if reactlook
 
-            if props.className
-              sscs.call props.className
-              , reactlook
-            else
-              props.className = reactlook
+          else
 
-            break
+            styleArray.push style
+
+        unless styleArray.length is 0
+          props.style = styleArray
+
+        unless classNames.length is 0
+          props.className = sscs.apply {}
+          , classNames
 
       else
 
