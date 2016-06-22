@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "./test/index.coffee",
-    "clean": "rm -rf build",
-    "build": "npm run clean; coffee -bo build src"
+    "clean": "rimraf ./build",
+    "build": "npm run clean; coffee -bo build src",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/react-cfx/cfx.rw#readme",
   "devDependencies": {
     "ddeyes": "0.0.1",
+    "rimraf": "^2.5.2",
     "shelljs": "^0.7.0"
   },
   "dependencies": {
@@ -34,6 +36,7 @@
     "radium": "^0.17.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "react-look": "^1.0.0-beta9"
+    "react-look": "^1.0.0-beta9",
+    "reactcss": "^1.0.3"
   }
 }
