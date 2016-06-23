@@ -33,14 +33,12 @@ Styl = (cssData) ->
   for k, v of cssData
 
     unless(
-      k is '::-webkit-input-placeholder' or
-      k is '::-moz-placeholder' or
-      k is '::input-placeholder'
+      k is 'inputPlaceholder' or
+      k is 'before' or
+      k is 'after'
     )
 
-      if (typeof v is 'object') and (
-        k is 'before' or
-        k is 'after' or
+      if typeof v is 'object' and (
         k is 'hover'
       )
         cssObj.reactcss[k] = default: v
@@ -50,7 +48,21 @@ Styl = (cssData) ->
 
     else
 
-      cssObj.reactlook.default[k] = v
+      if k is 'inputPlaceholder'
+        cssObj.reactlook.default['::-webkit-input-placeholder'] =
+        cssObj.reactlook.default['::-moz-placeholder'] =
+        cssObj.reactlook.default['::input-placeholder'] = v
+
+      else if k is 'before'
+        v.content = "\'#{v.content}\'" if v.content
+        cssObj.reactlook.default['::before'] = v
+
+      else if k is 'after'
+        v.content = "\'#{v.content}\'" if v.content
+        cssObj.reactlook.default['::after'] = v
+
+      else
+        cssObj.reactlook.default[k] = v
 
   cssObj
 
