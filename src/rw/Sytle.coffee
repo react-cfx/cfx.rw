@@ -38,9 +38,15 @@ Styl = (cssData) ->
       k is '::input-placeholder'
     )
 
-      continue if typeof v is ('object' or 'function')
-
-      cssObj.reactcss.default.default[k] = v
+      if (typeof v is 'object') and (
+        k is 'before' or
+        k is 'after' or
+        k is 'hover'
+      )
+        cssObj.reactcss[k] = default: v
+        console.log cssObj
+      else
+        cssObj.reactcss.default.default[k] = v
 
     else
 
