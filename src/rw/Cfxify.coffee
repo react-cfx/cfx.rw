@@ -30,6 +30,8 @@ RW =
 
         for index, style of props.style
 
+          continue unless style
+
           {
             reactcss
             reactlook
