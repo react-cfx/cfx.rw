@@ -38,11 +38,13 @@ Styl = (cssData) ->
       k is 'after'
     )
 
-      if typeof v is 'object' and (
+      if(
         k is 'hover'
       )
-        cssObj.reactcss[k] = default: v
+        cssObj.reactcss.default.default[":#{k}"] = v
+
       else
+
         cssObj.reactcss.default.default[k] = v
 
     else
