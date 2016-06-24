@@ -42,7 +42,6 @@ Styl = (cssData) ->
         k is 'hover'
       )
         cssObj.reactcss[k] = default: v
-        console.log cssObj
       else
         cssObj.reactcss.default.default[k] = v
 
@@ -53,13 +52,15 @@ Styl = (cssData) ->
         cssObj.reactlook.default['::-moz-placeholder'] =
         cssObj.reactlook.default['::input-placeholder'] = v
 
-      else if k is 'before'
-        v.content = "\'#{v.content}\'" if v.content
-        cssObj.reactlook.default['::before'] = v
+      else if(
+        k is 'before' or
+        k is 'after'
+      )
 
-      else if k is 'after'
-        v.content = "\'#{v.content}\'" if v.content
-        cssObj.reactlook.default['::after'] = v
+        if v.content and not /^url/.test v.content
+          v.content = "\'#{v.content}\'"
+
+        cssObj.reactlook.default["::#{k}"] = v
 
       else
         cssObj.reactlook.default[k] = v
