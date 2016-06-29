@@ -13,6 +13,50 @@ reactCSS = (
 ssct = StyleSheet.create
 sscs = StyleSheet.combineStyles
 
+# styleLogger = (
+#   {
+#     componentName
+#     style
+#   }
+# ) ->
+#   console.log 'Name: ' + componentName
+#   , style
+
+checkProps = (
+  {
+    componentName
+    style
+  }
+) ->
+  _style = Object.assign {}, style
+  # TODO 多属性合并的问题，后面不能这么简单处理，需要使用 plugin 机制 将 属性 展开，再合并
+  delete _style.border if style.border
+  Radium.Plugins.checkProps {
+    componentName
+    style: _style
+  }
+  {
+    componentName
+    style
+  }
+
+ConfiguredRadium = (component) ->
+  (
+    Radium
+      plugins: [
+        Radium.Plugins.mergeStyleArray
+        checkProps
+        Radium.Plugins.resolveMediaQueries
+        Radium.Plugins.resolveInteractionStyles
+        Radium.Plugins.keyframes
+        Radium.Plugins.visited
+        # Radium.Plugins.removeNestedStyles
+        Radium.Plugins.prefix
+        # styleLogger
+        checkProps
+      ]
+  ) component
+
 RW =
 
   cfxify: (tag) -> (props, args...) ->
@@ -93,7 +137,7 @@ RW =
     cfx.call @
     , component
     , [
-      Radium
+      ConfiguredRadium
       Look.default
     ]
 
